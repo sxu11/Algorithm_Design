@@ -11,7 +11,7 @@ DO remember to convert 1-based inds when indexing
 '''
 
 class Solution(object):
-    def twoSum(self, numbers, target):
+    def twoSumII(self, numbers, target):
         """
         :type numbers: List[int]
         :type target: int
@@ -28,23 +28,3 @@ class Solution(object):
             else:
                 j -= 1
 
-import unittest
-class TesTwoSumII(unittest.TestCase):
-    def setUp(self):
-        self.s = Solution()
-
-    def test_1(self):
-        nums = [2,7,11,15]
-        target = 9
-
-        actual_res = self.s.twoSum(nums, target)
-        expect_res = [1,2]
-        self.assertEqual(actual_res, expect_res)
-
-def suite():
-    suite = unittest.TestSuite()
-    suite.addTest(unittest.makeSuite(TesTwoSumII))
-    return suite
-
-if __name__ == '__main__':
-    unittest.TextTestRunner(verbosity=2).run(suite())
