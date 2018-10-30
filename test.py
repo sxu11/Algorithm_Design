@@ -1,3 +1,6 @@
 
 
-print [1] in [[1],[2]]
+a = set()
+a.add(1)
+a.add('1')
+print a
