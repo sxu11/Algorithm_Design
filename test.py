@@ -1,6 +1,6 @@
 
 
-a = set()
-a.add(1)
-a.add('1')
-print a
+import bisect
+
+a = [-1,1,3]
+print abs(a)
