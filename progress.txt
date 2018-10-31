@@ -1,5 +1,17 @@
-20181027 P1_TwoSum
-20181028 P167_TwoSumII, P15_ThreeSum
-20181029 P170_TwoSumIII, P653_TwoSumIV
-20181030 NA
-20181031 P16_ThreeSumClosest
+20181027
+P1_TwoSum
+
+20181028
+P167_TwoSumII
+P15_ThreeSum
+
+20181029
+P170_TwoSumIII
+P653_TwoSumIV
+
+20181030
+NA
+
+20181031
+P16_ThreeSumClosest,
+P259_ThreeSumSmaller (Google, Facebook, Cousera)
