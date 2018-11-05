@@ -6,7 +6,6 @@ TODO: how to set "from XXX import" and "suite.addTest(tester(XXX))" by one comma
 Created: 2018-10-28
 '''
 
-from P167_TwoSumII import Solution
 
 import unittest
 class tester(unittest.TestCase):

@@ -15,3 +15,9 @@ NA
 20181031
 P16_ThreeSumClosest,
 P259_ThreeSumSmaller (Google, Facebook, Cousera)
+
+20181103
+P18_FourSum (Facebook)
+
+20181104
+P454_FourSumII (Amazon)
