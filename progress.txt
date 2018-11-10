@@ -24,3 +24,6 @@ P454_FourSumII (Amazon)
 
 20181107
 P560_SubarraySumEqualsK (Facebook 28, Google 3, Microsoft 2, Snapchat 2)
+
+20181109
+P523_ContinuousSubarraySum (Facebook 15, Microsoft 2, Samsung 2)
