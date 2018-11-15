@@ -27,3 +27,10 @@ P560_SubarraySumEqualsK (Facebook 28, Google 3, Microsoft 2, Snapchat 2)
 
 20181109
 P523_ContinuousSubarraySum (Facebook 15, Microsoft 2, Samsung 2)
+
+20181112
+P713_SubarrayProductLessThanK (Cousera 9, Akuna Capital 5, Expedia 3)
+
+20181114
+724. Find Pivot Index
+152. Maximum Product Subarray
