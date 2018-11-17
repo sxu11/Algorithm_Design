@@ -34,3 +34,6 @@ P713_SubarrayProductLessThanK (Cousera 9, Akuna Capital 5, Expedia 3)
 20181114
 724. Find Pivot Index
 152. Maximum Product Subarray
+
+20181116
+325. Maximum Size Subarray Sum Equals k (Facebook 6, Amazon 3)
