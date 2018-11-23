@@ -1,6 +1,10 @@
 '''
 Dynamical programming is really easy.
 Just brutal force + Memory.
+(brainless way, using dictionary instead of array. )
+
+After
+
 
 Stephen:
 def wordBreak(self, s, words):
@@ -24,6 +28,11 @@ def wordBreak(self, s, words):
     return ok[-1]
 '''
 
+'''
+Index-based comparison, 408 ms. 
+'''
+
+
 class Solution(object):
     def wordBreak(self, s, wordDict):
         """
@@ -33,42 +42,87 @@ class Solution(object):
         """
 
         record_dict = {}
+        wordDict = set(wordDict)
 
-        def breakable(s):
-            if not s:
-                return True
+        '''
+        Method 1: dp[i] means wordDict[:i] is good
+        '''
+        # TODO: do it when necessary
 
-            elif len(s) == 1:
-                return s in wordDict
+        '''
+        Method 2: indices based dictionary
+        '''
 
-            else:
-                '''
-                Forgot this part!!!
-                '''
-                if s in wordDict:
-                    return True
-                # len >= 2
-                # catsandog
-                # c|atsandog
-                # catsando|g
-                # [:i], [i:]
-                for i in range(1, len(s)):
-                    # if breakable(s[:i]) and breakable(s[i:]):
-                    #     return True
-                    if s[:i] in record_dict:
-                        left_res = record_dict[s[:i]]
-                    else:
-                        left_res = breakable(s[:i])
-                        record_dict[s[:i]] = left_res
+        #         def breakable(i,j): # whether s[i:j] is breakable
+        #             if i==j:
+        #                 return True
 
-                    if s[i:] in record_dict:
-                        right_res = record_dict[s[i:]]
-                    else:
-                        right_res = breakable(s[i:])
-                        record_dict[s[i:]] = right_res
+        #             elif j-i == 1:
+        #                 return s[i:j] in wordDict
 
-                    if left_res and right_res:
-                        return True
-                return False
+        #             else:
+        #                 '''
+        #                 Forgot this part!!!
+        #                 '''
+        #                 if s[i:j] in wordDict:
+        #                     return True
+        #                 for k in range(i+1,j):
+        #                     if (i,k) in record_dict:
+        #                         left_res = record_dict[(i,k)]
+        #                     else:
+        #                         left_res = breakable(i,k)
+        #                         record_dict[(i,k)] = left_res
 
-        return breakable(s)
+        #                     if (k,j) in record_dict:
+        #                         right_res = record_dict[(k,j)]
+        #                     else:
+        #                         right_res = breakable(k,j)
+        #                         record_dict[(k,j)] = right_res
+
+        #                     if left_res and right_res:
+        #                         return True
+        #                 return False
+
+        #         return breakable(0, len(s))
+
+        '''
+        Method 3: substring based dictionary
+        '''
+#         def breakable(s):
+#             if not s:
+#                 return True
+
+#             elif len(s) == 1:
+#                 return s in wordDict
+
+#             else:
+#                 '''
+#                 Forgot this part!!!
+#                 '''
+#                 if s in wordDict:
+#                     return True
+#                 # len >= 2
+#                 # catsandog
+#                 # c|atsandog
+#                 # catsando|g
+#                 # [:i], [i:]
+#                 for i in range(1,len(s)):
+#                     # if breakable(s[:i]) and breakable(s[i:]):
+#                     #     return True
+#                     if s[:i] in record_dict:
+#                         left_res = record_dict[s[:i]]
+#                     else:
+#                         left_res = breakable(s[:i])
+#                         record_dict[s[:i]] = left_res
+
+#                     if s[i:] in record_dict:
+#                         right_res = record_dict[s[i:]]
+#                     else:
+#                         right_res = breakable(s[i:])
+#                         record_dict[s[i:]] = right_res
+
+#                     if left_res and right_res:
+#                         return True
+#                 return False
+
+#         return breakable(s)
