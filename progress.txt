@@ -48,3 +48,10 @@ P713_SubarrayProductLessThanK (Cousera 9, Akuna Capital 5, Expedia 3)
 
 20181125
 72. Edit Distance
+
+20181126
+175. Combine Two Tables (Adobe, Google)
+176. Second Highest Salary
+
+20181127
+146. LRUCache (Google, ...)
