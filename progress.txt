@@ -61,3 +61,12 @@ P713_SubarrayProductLessThanK (Cousera 9, Akuna Capital 5, Expedia 3)
 
 20181129
 4. Median of Two Sorted Arrays (Google popular)
+
+20181201
+Contest 113-1. Largest Time for Given Digits
+Contest 113-2. Flip Equivalent Binary Trees
+Contest 113-3. Reveal Cards In Increasing Order
+
+20181204
+56. Merge Intervals
+Contest 113-4. Largest Component Size by Common Factor
