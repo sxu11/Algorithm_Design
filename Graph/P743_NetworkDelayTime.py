@@ -14,6 +14,7 @@ All edges times[i] = (u, v, w) will have 1 <= u, v <= N and 1 <= w <= 100.
 
 '''
 
+
 class Solution(object):
     def networkDelayTime(self, times, N, K):
         """
@@ -29,6 +30,14 @@ class Solution(object):
             receive_time[i] = float('inf')
         receive_time[K] = 0
 
+        edge = {}
+        for time in times:
+            v, u, w = time
+            if v in edge:
+                edge[v].append((u, w))
+            else:
+                edge[v] = [(u, w)]
+
         from heapq import heappush, heappop
         queue = [(0, K)]
         seen = set()
@@ -38,9 +47,10 @@ class Solution(object):
             seen.add(v)
 
             # update receive_times
-            for time in times:
-                if time[0] == v:
-                    u, w = time[1], time[2]
+            # for time in times:
+            if v in edge:
+                for u, w in edge[v]:
+                    # if time[0] == v:
                     receive_time[u] = min(receive_time[u], t + w)
                     if not (u in seen):
                         # add neighboring v's
@@ -51,3 +61,6 @@ class Solution(object):
             return -1
         else:
             return max_t
+
+
+
