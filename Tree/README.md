@@ -2,7 +2,9 @@
 Solutions to tree problems are relatively easy to come up. Here I study several special trees.
 
 Trie:
-From wiki, a trie, also called digital tree, radix tree or prefix tree, is a kind of search tree—an ordered tree data structure used to store a dynamic set or associative array where the keys are usually strings.
+From wiki, a trie, also called digital tree, radix tree or prefix tree, is a kind 
+of search tree—an ordered tree data structure used to store a dynamic set or 
+associative array where the keys are usually strings.
 
 Example: 
 For keys {"A", "to", "tea", "ted", "ten", "i", "in", and "inn"}:
