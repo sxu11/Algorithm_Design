@@ -96,4 +96,33 @@ List of e.g.'s:
         
     - ?: Trie
     
-- Using various of methods to know which previous results to use/store
+- Using various methods to know which previous results to use/store
+    in which case (whether it will be smart/stupid transitions). 
+    - Edit distance:
+        - Two dimensional problem, misleading to think about given 
+        dist(A[:i], B[:j]) solved, how to do dist(A[:i+1], B[:j]), 
+        dist(A[:i], B[:j+1]), dist(A[:i+1], B[:j+1])!
+        - Think about in order to solve dist(A[:i], B[:j]), what's needed
+        
+        - Try a few examples and find the implicits (most difficult!)
+        
+        - The problem itself determined what are smart & stupid:
+            - "Smart": In which case: same char between A[i] and B[i]
+            - "Stupid": all other cases (including same char not canceled out)
+    
+        - Finding implicits of rule for smart transitions: 
+        dist(AAA, AA)=1, but dist(AAA, AAA)=0. So it is
+        not non-decreasing, from dist(A[:i-1], B[:j-1]) to dist(A[:i], B[:j-1]);
+        But it IS non-decreasing from dist(A[:i-1], B[:j-1]) to dist(A[:i], B[:j])!
+        Proof: A[i] canceling with B[j] is optimal already; it is impossible for
+        3 or 4 elements to cancel out together!
+        
+        - Smart transitions: dist(AAA, AA) -> but dist(AAA, AAA).
+        The key thing is to be mathematically sure that only when A[i]==B[j] there is
+        the smart transition!! Cases like A[i]==B[j-1] does not help!
+        
+        - Stupid transitions: (AAA, BB) -> (AAA, BBB)
+        
+        - Using the rule: dist(A[:i], B[:j]) comes from three transformations: 
+            - Innovation: dist(A[:i-1], B[:j-1]), if A[i]==B[j]
+            - Otherwise??? No Innovation, only stupid following prior results
