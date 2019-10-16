@@ -30,6 +30,9 @@ group by web_requests.date
 
 Question: In both requests, there are multiple requests per user per day!
 
+
+
+
 Better:
 1. Find out in each table, those users with >=1 requests!
 
