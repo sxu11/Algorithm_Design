@@ -96,3 +96,20 @@ class Solution(object):
                 else:
                     val2ind_dict[num] = i
 
+# C# implementation
+"""
+public class Solution {
+    public int[] TwoSum(int[] nums, int target) {
+        var seenValToInd = new Dictionary<int, int>();
+        for (var i=0; i<nums.Length; i++)
+        {
+            if (seenValToInd.ContainsKey(target-nums[i])){
+                var preInd = seenValToInd[target-nums[i]];
+                return new int[]{preInd, i};
+            }
+            seenValToInd[nums[i]] = i;
+        }
+        return null;
+    }
+}
+"""

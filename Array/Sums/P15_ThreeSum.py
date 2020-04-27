@@ -133,3 +133,65 @@ class Solution(object):
             for pair in cur_res:
                 final_res_set.add(tuple(pair))
         return list(final_res_set)
+
+
+#C# implementation (however timeout; TODO: presort the list and use binary search instead of brutal force)
+""" 
+public class Solution {
+    public List<int> TwoSumAllRes(List<int> nums, int target) {
+        var seenVal = new HashSet<int>();
+        var res = new List<int>(); // new int[]; // cannot do w/o initalizing size 
+        for (var i=0; i<nums.Count(); i++)
+        {
+            if (seenVal.Contains(target-nums[i])){
+                res.Add(nums[i]);
+            }
+            seenVal.Add(nums[i]);
+        }
+        return res;
+    }
+    
+    public IList<IList<int>> ThreeSum(int[] nums) {
+        // Test modified TwoSumAllRes
+        /*
+        var testEg1 = new int[]{1,2,3};
+        var testTar1 = 3;
+        var res1 = TwoSumAllRes(testEg1, testTar1);
+        res1.ForEach(Console.WriteLine);
+        */
+        
+        // 1st, find all triplets
+        var res = new List<IList<int>>();
+        var myNums = new List<int>(nums);
+        
+        for (var i=0; i<myNums.Count(); i++)
+        {
+            // find all combinations of rest of array that sums up to -nums[i]
+            var curTarget = -myNums[i];
+            var curRes = TwoSumAllRes(myNums.Skip(i+1).ToList(), curTarget);
+            
+            // add current results pair [nums[i], curRes[j], -nums[i]-curRes[j]] uniquely into res
+            for (var j=0; j<curRes.Count(); j++)
+            {
+                var curPairList = new List<int>(){myNums[i], curRes[j], -myNums[i]-curRes[j]};
+                //curPairList.Sort();
+                //curPairSet = new HashSet<int>(curPairList);
+                res.Add(curPairList);
+            }
+        }
+        
+        // 2nd, avoid repeat
+        var resNonRepeat = new List<IList<int>>();
+        foreach (List<int> item in res)
+        {
+            item.Sort();
+            if (!resNonRepeat.Any(x => x.SequenceEqual(item)))
+            {
+                resNonRepeat.Add(item);
+            }
+        }
+        
+        return resNonRepeat;
+    }
+}
+"""
