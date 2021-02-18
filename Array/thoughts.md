@@ -23,6 +23,10 @@ Details:
     c. check if expansion is valid palindromic
   - Good idea is to combine a-c
 
+Make good use of cumSum! esp when talking about continuous subarray!  
+- P325_MaximumSizeSubarraySumEqualsK, use with (if target-cumSum[i] in dict)
+
+
 Quotes:
 - Subsets:
   - Try to build a directed graph in which node x connects to node y (y > x). For example, if the given set is [0,1,2,3,4], then:
