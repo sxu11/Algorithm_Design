@@ -12,10 +12,16 @@
 
 - Given an array of n integers nums and a target, find the number of index triplets i, j, k with 0 <= i < j < k < n that satisfy the condition nums[i] + nums[j] + nums[k] < target.
 
-
 Details: 
 - When iter i,j,k, remember range of i is len-2
 - WordBreak [139], use dict (can represent 3 states: not seen/true/false) instead of set's 2 states (true/other). In this problem, need to memorize/differentiate whether it is false/not seen to avoid TLE. 
+
+- LongestPalindromicSubstring [5]
+  - Stupid idea: O(n^3)
+    a. iter all mid pt
+    b. iter all expansion
+    c. check if expansion is valid palindromic
+  - Good idea is to combine a-c
 
 Quotes:
 - Subsets:
