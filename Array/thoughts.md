@@ -23,8 +23,20 @@ Details:
     c. check if expansion is valid palindromic
   - Good idea is to combine a-c
 
+- LongestPalindromicSubsequence [516]
+  - Completely different idea! use dp to solve:
+    - solve s[i:j] from s[i+1:j], s[i:j-1], and s[i+1:j-1]
+    - don't need to check both odd and even cases. even cases were auto-handled by when i>j, res=0!!!
+  - Hard extension: Maximize Palindrome Length From Subsequences [1771] 
+    - the trick is to add a constraint: the maximal must span 2 words!
+    - how to do: add legitPool cache, only when this:
+      - i < self.len1 and j >= self.len1 and s[i]==s[j]
+
 Make good use of cumSum! esp when talking about continuous subarray!  
 - P325_MaximumSizeSubarraySumEqualsK, use with (if target-cumSum[i] in dict)
+
+TODO:
+- Top-down always so much slower than bottom-up ?!
 
 
 Quotes:
