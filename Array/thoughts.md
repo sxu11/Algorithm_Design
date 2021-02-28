@@ -31,6 +31,9 @@ Details:
     - the trick is to add a constraint: the maximal must span 2 words!
     - how to do: add legitPool cache, only when this:
       - i < self.len1 and j >= self.len1 and s[i]==s[j]
+  - Bottom up: 
+    - ![plot](palindSubseqBottomUp.jpg)
+    - because s[i:j] requires info of s[i:j-1], j needs to be iterated reversely!! 
 
 Make good use of cumSum! esp when talking about continuous subarray!  
 - P325_MaximumSizeSubarraySumEqualsK, use with (if target-cumSum[i] in dict)
