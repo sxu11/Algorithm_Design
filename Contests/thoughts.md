@@ -1,0 +1,32 @@
+Contest 230, 02/27/2021
+- 3 problems done (while babysitting after 7:15pm), 1533 / 11654
+  - 5689 Count Items Matching a Rule
+    - too easy
+  - 5690 Closest Dessert Cost
+    - Subsets, small variation! Good use, cool think & execution
+  - 5691 Equal Sum Arrays With Minimum Number of Operations
+    - Good & clean initial thoughts w/ greedy! proud
+- 1 problem undone
+  - 1776 Car Fleet II
+    - I later came up with my O(n^2) TLE solution based on following observation 1
+    - Use of stack is really shocking!! 
+      - closest right cars most likely
+    - [Good Explain](https://leetcode.com/problems/car-fleet-ii/discuss/1085844/Python3.-Simple-solution-with-using-stack): Based on the code and comment, two key observations are:
+        - The collision time for a car won't be affected by the cars on its left. Thus if going from right to left, we can fix the collision time along the way.
+        - The collision time for a car will only be affected by the cars on its right. Again among all the cars on current car's right, there are certain cars that won't affect current car's collision time. Namely, if the car has a higher speed than the current car, or, if the car's collision time is earlier than the current car's collision time with this car, then such cars won't affect current car's collision time, and can be ignored. The mono stack has only kept those cars that can possibly affect the current car.
+    - [Good Recommend](https://leetcode.com/problems/car-fleet-ii/discuss/1085987/JavaC%2B%2BPython-O(n)-Stack-Solution): stack problems
+        - Car Fleet II
+        - Find the Most Competitive Subsequence
+        - Minimum Number of Removals to Make Mountain Array
+        - Final Prices With a Special Discount in a Shop
+        - Constrained Subsequence Sum
+        - Minimum Cost Tree From Leaf Values
+        - Sum of Subarray Minimums
+        - Online Stock Span
+        - Score of Parentheses
+        - Next Greater Element II
+        - Next Greater Element I
+        - Largest Rectangle in Histogram
+        - Trapping Rain Water
+      
+    
