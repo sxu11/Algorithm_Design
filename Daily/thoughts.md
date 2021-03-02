@@ -11,4 +11,6 @@ Concurrency
     - Pulse only signals a thread that is already in the waiting queue. This means if you call Pulse in a thread and then call Wait in another thread on the same object afterwards, the second thread will wait forever (deadlock).
     - I for myself used wait/pulse as well as lock-free algorithms using CAS operations
 - Do not use AutoResetEvent as lock, as there is no [Fairness](https://stackoverflow.com/questions/17273933/autoresetevent-as-a-lock-replacement-in-c)
- 
+- [Use Monitor](https://leetcode.com/problems/print-in-order/discuss/432149/C-Monitor)
+  - The volatile keyword indicates that a field might be modified by multiple threads that are executing at the same time. 
+- [Use Semaphore](https://leetcode.com/problems/print-in-order/discuss/856697/C-Semaphore-based-solution)
