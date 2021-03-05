@@ -18,3 +18,9 @@ Concurrency
 20210304 Today's daily really interesting!
 - Have a centralized "i" makes it much simpler
 - Detail: Odd and Even have different last numbers. Need to clear
+
+20210305 Key is really:
+- Monitor.PulseAll(m_lock);
+  - Reason is that Monitor.Enter(m_lock) waits:
+    - not like frequently re-checking if m_lock is available?
+    - but like needs to be notified if m_lock is available...
