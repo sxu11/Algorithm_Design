@@ -1,10 +1,7 @@
 using
 System.Threading;
 
-public
-
-
-class FooBar {
+public class FooBar {
 private int n;
 private AutoResetEvent event1;
 private AutoResetEvent event2;

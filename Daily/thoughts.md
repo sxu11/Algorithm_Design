@@ -14,3 +14,7 @@ Concurrency
 - [Use Monitor](https://leetcode.com/problems/print-in-order/discuss/432149/C-Monitor)
   - The volatile keyword indicates that a field might be modified by multiple threads that are executing at the same time. 
 - [Use Semaphore](https://leetcode.com/problems/print-in-order/discuss/856697/C-Semaphore-based-solution)
+
+20210304 Today's daily really interesting!
+- Have a centralized "i" makes it much simpler
+- Detail: Odd and Even have different last numbers. Need to clear
