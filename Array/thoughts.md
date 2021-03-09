@@ -42,6 +42,11 @@ TODO:
 - Top-down always so much slower than bottom-up ?!
 
 
+Dijkstra's: 可以算出所有nodes离sink的距离
+- 用Q, 开始把所有nodes都放进去
+  - 每次选出Q中dist最小的，更新其(还在Q中)neighbors的dists
+
+
 Quotes:
 - Subsets:
   - Try to build a directed graph in which node x connects to node y (y > x). For example, if the given set is [0,1,2,3,4], then:

@@ -29,4 +29,42 @@ Contest 230, 02/27/2021
         - Largest Rectangle in Histogram
         - Trapping Rain Water
       
-    
+      
+Context 231, 03/06/2021
+
+Number of Restricted Paths From First to Last Node. Good problem!
+  1. Construct Graph
+    - [this](https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/discuss/1097204/PythonJava-Dijkstra-and-Cached-DFS-Clean-and-Concise) is so simple & elegent:
+        - graph = defaultdict(list)
+        - for u, v, w in edges:
+            - graph[u].append((w, v))
+            - graph[v].append((w, u))
+    - mine is awkward: 
+        - constructed a Node class
+        - used a Node list to append all Nodes
+  2. Dijkstra:
+    - mine: wiki step-by-step
+        - create list-based Q and dict-based dist
+        - while Q not empty:
+          - find min dist的node (O(nodes), not good!)
+          - 用它来更新所有neighbors (O(edges))的dist
+    - good: 
+        - minHeap = [(0,n)]  # dist,node; with heap, becomes O(log(nodes))
+        - dist = [float("inf")] * (n+1)
+        - dist[n] = 0
+        - while minHeap:
+          - d,u = heappop(minHeap)  
+          - if d!=dist[u]: continue  # Pruning step, can be ignored; there is shorter path than direct connect to it's neighbor, therefore, it can be ignored
+          - for w,v in graph[u]:
+            - if dist[v]>dist[u]+w:
+              - dist[v]=dist[u]+w
+              - heappush(minHeap, (dist[v],v))
+          - return dist
+        - 所以先建堆，和边iter边建堆的区别在哪里？
+          - 貌似[都行](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
+  3. dfs也有讲究，是否可以用@lru_cache(None):
+    - mine: 
+      - 纯dfs visit各Node, 不返回结果，如果遇到sink就把self.res += 1
+      - 这种如果用cache就会出错，因为dfs(self, node)只要node相同就会skip (?)
+    - good: 
+      - dfs的return返回"从当前node出发找到的path数"
