@@ -62,9 +62,12 @@ Number of Restricted Paths From First to Last Node. Good problem!
           - return dist
         - 所以先建堆，和边iter边建堆的区别在哪里？
           - 貌似[都行](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
+        - 即使先建好heap, 中间也需要不断的把updated dist给heappush进Q. 所以所谓的"Pruning step"其实是filter掉outdated结果
   3. dfs也有讲究，是否可以用@lru_cache(None):
     - mine: 
       - 纯dfs visit各Node, 不返回结果，如果遇到sink就把self.res += 1
       - 这种如果用cache就会出错，因为dfs(self, node)只要node相同就会skip (?)
     - good: 
       - dfs的return返回"从当前node出发找到的path数"
+      - lru_cache只cache return的结果，并跳过执行的过程！（所以不要搞什么global self.res+1 !!）
+    - 其实lru_cache只是recursion w/ memory, 做的比自己好一些而已；recursion中间不要有global !!!
