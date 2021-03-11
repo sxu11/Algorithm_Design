@@ -25,3 +25,16 @@ Concurrency
     - not like frequently re-checking if m_lock is available?
     - but like needs to be notified if m_lock is available...
         
+20210310 Fizz Buzz 
+- old: 
+    - Multithreaded这题就是弄个优先级：
+        - fizzbuzz先看，不行release lock
+        - fizz和buzz再看
+        - number
+    - 难点是高优先级的弄完后，就通知其它的别等了！
+- 关键：
+    - while(this.fbEvent.WaitOne() && this.i <= this.n) 这个太值得玩味了，包括顺序！
+- 细节：
+    - 用来iter的i是global的！这样才最后会 > n
+    - number出for循环后要把其它几个event都Set()了！
+
