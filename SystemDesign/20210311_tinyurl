@@ -39,3 +39,17 @@
     - CreateURL(api_dev_key, original_url,
     custom_alias=None, user_name=None, expire_date=None)
     - deleteURL(api_dev_key, url_key)
+
+- DB: 2 tables
+    - URL mapping
+        - Hash
+        - OriginalURL
+        - CreateDate
+        - ExpireDate
+        - UserID
+    - User
+        - UserID
+        - Name
+        - Email
+        - CreateDate
+        - LastLogin

@@ -71,3 +71,12 @@ Number of Restricted Paths From First to Last Node. Good problem!
       - dfs的return返回"从当前node出发找到的path数"
       - lru_cache只cache return的结果，并跳过执行的过程！（所以不要搞什么global self.res+1 !!）
     - 其实lru_cache只是recursion w/ memory, 做的比自己好一些而已；recursion中间不要有global !!!
+    
+Contest 232
+- Problem 3 (想了会儿当场做出)
+    - 不要怕推不出数学公式
+    - 试一试brutal force, 再在此基础上优化
+- Problem 4 (时间不多就放弃了)
+    - 不要怕全局的复杂，DP不知道怎么选择推进宽路径
+    - 也许最细的那条greedy就是方法！
+    - Don't mix 2-layer logic into an "or", plz!
