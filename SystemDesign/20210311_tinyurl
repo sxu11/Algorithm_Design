@@ -1,3 +1,5 @@
+https://www.educative.io/courses/grokking-the-system-design-interview/m2ygV4E81AR
+
 1. What: Create shorter alias for long URLs.
 - Hard (functional) require:
     - fixed length
@@ -40,16 +42,95 @@
     custom_alias=None, user_name=None, expire_date=None)
     - deleteURL(api_dev_key, url_key)
 
-- DB: 2 tables
-    - URL mapping
-        - Hash
-        - OriginalURL
-        - CreateDate
-        - ExpireDate
-        - UserID
-    - User
-        - UserID
-        - Name
-        - Email
-        - CreateDate
-        - LastLogin
+- DB:
+    - Type
+        - NoSQL like DynamoDB, Cassandra, Riak because:
+            - we anticipate billions of rows
+                - easier to scale
+            - don't need to use relationships between objects
+
+    - Set up
+        - URL mapping
+            - Hash
+            - OriginalURL
+            - CreateDate
+            - ExpireDate
+            - UserID
+        - User
+            - UserID
+            - Name
+            - Email
+            - CreateDate
+            - LastLogin
+
+    - Cache (use off-the-shelf Memcached?)
+        - How much cache memory?
+            - 170GB for 20%. 1 server (~256GB) enough
+        - Cache eviction policy?
+            - LRU (linked hash map)
+        - replicate caching server to distribute load
+            - update on reading miss
+    - Data Partitioning and Replication:
+        - partitioning schema:
+            - based on initial letter?
+                - unbalanced
+            - hash-based (map any key to a num between [1...256])
+                - can still overload, use Consistent Hashing
+    - Clean up:
+        - slowly remove expired links & do lazy cleanup (it's ok for some old ones to stay)
+            - delete upon read
+            - a separate light-weighted cleanup service, run only when traffic low
+
+- Encoding Algo:
+    - hashing (MD5, SHA256, can then be encoded for display?)
+        - question: what would be the length?
+            - With base64, [A-Z,a-z,0-9,+,/]:
+                - 6 letter: 64^6 ~ 68.7 billion (suffice)
+                - 8 letter: 64^8 ~ 281 trillion
+            - With MD5 (128-bit, after base64, we'll get > 21 chars)
+                - Now we only have space for 8 chars per short key
+                - We can take first 6 or 8 letters
+    - issues:
+        - multiple user enter same URL, but get same shortened (not good)
+        - what if parts of URL are URL-encoded? (id=design & %3Fid%3Ddesign are identical)
+    - solve:
+        - append an increasing num to each URL to make it unique, but:
+            - overflow?
+            - performance?
+        - append user id, but:
+            - have to sign in?
+            - still conflict?
+        - generate keys offline (Key Generation Service, stored in key-DB)
+            - simple and fast and unique
+            - concurrency?
+                - unused/used key tables
+                - cache
+                - lock
+            - key-DB size?
+                - With base64, have 68.7B unique 6-letter keys.
+                    - If use 1 byte to store 1 alpha-numeric char, we can store all in 6 * 68.7B = 412 GB
+            - single pt of failure?
+                - use replica
+
+- Load Balancer
+    - Where to add:
+        - Clients & Application servers
+        - App servers & DB servers
+        - App servers & Cache servers
+    - Method:
+        - Round Robin
+            - simple, no overhead
+            - LB will take out dead server
+            - but can be overloaded
+                - handle by periodically queries the backend server about load and adjust traffic
+
+- Telemetry
+    - usage, traffic (date, time)
+    - user geology (country, referring page)
+    - hotspot URL
+
+- Security & Permission
+    - private/protected shortURL?
+        - add permission level (public/private) in URL DB, or
+        - create separate table for UserID, permissions
+            - for NoSQL wide-column DB like Cassandra, key is Hash, columns are permitted UserIDs.
