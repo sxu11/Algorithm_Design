@@ -38,3 +38,19 @@ Concurrency
     - 用来iter的i是global的！这样才最后会 > n
     - number出for循环后要把其它几个event都Set()了！
 
+20210315
+1. 我自己的正向想法不是全局最优，不能handle: [0,2], [1,3], [2,4], [3,5], [4,6]
+    - 一个错误的贪心法，
+         1. For each interval, find how many intervals are overlapped with it (like nodes "linked" in a graph)
+             - define Class
+         2. sort nodes by degree of links. Remove from the biggest (and de-link neighbors accordingly)
+             - use heap
+         3. util all degrees are 0.
+        - 证明也错误（任意俩interval之间的关系不影响其它intervals）
+2. 太巧妙了，求最少去掉的，反过来求最大集合
+3. 为什么按照end来排序的贪心法能行
+    -贪心法往往需要证明：
+    -首先，其它的end都比它大
+    -其次，如果一些intervals跟它有overlap, 那么在这所有这些intervals中能且只能选一个
+    -那么，就选第一个好了，对后面的选取更有利
+
