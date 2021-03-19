@@ -18,6 +18,8 @@ No.	#	Title
             - 这样就不能用A[-1] (因为被b污染), 换做用一个constant p
 
 3	560	Subarray Sum Equals K
+- 之前做了, CumSum思想 
+
 4	273	Integer to English Words
 5	124	Binary Tree Maximum Path Sum
 6	269	Alien Dictionary
