@@ -7,6 +7,16 @@ No.	#	Title
     - heappop K pts
     
 2	238	Product of Array Except Self
+- 之前做了，但最优解抄答案
+    - Could you solve it in O(n) time complexity and without using division?
+        - 关键是发现：第i个数，来自于nums[:i]和nums[i+1:]的乘积
+        - 用一个list A, 其第i个元素是i前所有元素的乘积（关键在于用了cumSum的思想，A[-1]就包含了累计乘积，不需要额外for loop）
+        - 用一个list B, 其第i个元素是i后所有元素的乘积
+        - 最后把二者相乘
+    - Could you solve it with O(1) constant space complexity?
+        - 怎么不用list B? 直接在A上操作
+            - 这样就不能用A[-1] (因为被b污染), 换做用一个constant p
+
 3	560	Subarray Sum Equals K
 4	273	Integer to English Words
 5	124	Binary Tree Maximum Path Sum
