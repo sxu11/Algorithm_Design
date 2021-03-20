@@ -21,6 +21,25 @@ No.	#	Title
 - 之前做了, CumSum思想 
 
 4	273	Integer to English Words
+- 我的思路：
+    - 先变成string, 来念
+        - 不好！本质上要按照"范围"的数字性，来分类！！
+    - 举出几个例子（0, 10, 11, 12, 21, 100）
+        - 例子不够！
+    - 先搞定3位数的以内的
+        - 这个思路是对的，但以下都没搞清楚：
+            - 外部怎么用它
+            - 它内部还是要recursive
+        - 个位数硬map，十位数分类，百位数hundred+十位数
+            - 0～20分类没够！实际上dict+ifElse极其混乱；不如全部dict.
+            - tens也直接dict !! + recursive..
+            - 百位数dict + recursive...
+    - 4位数以上的：分segment处理
+        - ifElse来判断是10^3, 10^6, 还是10^9区间！
+            - 没法消除1 Billion中的"Million"!
+                - 什么时候没有Million? 当Million这个segment没有数的时候！（sth like num%1000==0）
+        
+
 5	124	Binary Tree Maximum Path Sum
 6	269	Alien Dictionary
 7	415	Add Strings

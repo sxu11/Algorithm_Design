@@ -1,0 +1,55 @@
+Scott Shi
+- [doc](https://docs.google.com/document/d/1X0WBrqalFCCtc3U_pGWnsLPpSIfGvswXY-4U7ekGLb4/edit)
+- [video](https://www.youtube.com/watch?v=FI8G3VeI94w&t=112s)
+
+- Problem
+    - In a multi-region multi-zone data center
+    - Need to replicate an ever-changing file ~10GB to a growing 10k nodes
+    - Every node could go down.
+    - There should be no data loss.
+
+
+- Solu
+    - High level arch:
+        - Use Zookeeper to keep track of
+            - location of master file
+            - version change of master file
+            - membership management of a file sharing group
+        - Use bittorrent to
+            - transfer large files peer-to-peer to avoid single node traffic overloaded
+    - 0th,
+        - Master file should NOT change too frequently
+            - the "write amplification" is \prop to num of nodes that needs to be replicated
+            - next round of replication will be started while prev rounds still ongoing
+        - File should replicate to avoid single pt of failure
+        - There should be no data loss for changes appended to the file
+        - Read from replicas could read stale data but not corrupted data
+    - 1st,
+        - Have 3 machines to keep up-to-date version of files
+        - each write is ensured to write to all 3 before returning success to requester
+        - new write is appended as change logs to a file,
+            - e.g. filename + versionnum
+        - write order is total broadcast order
+            - i.e. no write loss
+            - all replicas got the changes in the same order
+    - 2nd,
+        - When a certain threshold is met, a pump version is issued
+            - e.g. after certain time period
+            - e.g. after > M changes
+        - New append log file created as filename + (versionnum+1)
+        - All new requests are redirected to this new log file
+            - old log is fully merged w/ old file
+    - 3rd,
+        - Master node of the 3-machine uploads the merged file of cur version to Amazon S3
+            - once the file upload is completed
+    - 4th,
+        - Zookeeper tracks the group membership for the broadcast group
+            - since within DC, membership change should be rare
+    - 5.
+        - Once Zookeeper is updated with new ver and its Amazon S3 location, a new download commands is issued to all group members
+            - which will use bitTorrent to share the files among them
+    - 6.
+        - At any given time, each replica will have a list of the same file of diff versions:
+            - e.g. FileA_1, FileA_2, FileA_3_crdownload
+        - The download in progress will have an additional appendix, should not be used to serve requests
+        - The stale version of files will be cleaned up later by a background process
