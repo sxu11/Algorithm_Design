@@ -11,23 +11,29 @@ def getMinArraySum(m, i, n):
     #     else:
     #         cur = 1
     #     res += cur
-    if m < i:
+    """
+    Case 1:
+    1,1,...,1,2,...,m-2,
+    """
+    if m <= i:
         res += (m - 1) * m / 2 + (i - m)
     else:
-        res += (2 * m - i + 2) * m / 2
+        res += (2 * m - i) * (i - 1) / 2
 
-    cur = m
+    # cur = m
     # for j in range(i+1,n):
     #     if cur > 1:
     #         cur -= 1
     #     else:
     #         cur = 1
     #     res += cur
-    if m < n - i - 1:
-        res += (m - 1) * m / 2 + (n - i - 1 - m)
+
+    #     use n-i to replace (i-1), or use n-i+1 to replace i
+    if m <= n - i + 1:
+        res += (m - 1) * m / 2 + (n - i + 1 - m)
     else:
-        res += (2 * m - n + i + 1 + 2) * m / 2
-    return res
+        res += (2 * m - (n - i + 1)) * (n - i) / 2  # (2*m-n+i)*(n-i-1)/2
+    return int(res)
 
 
 class Solution:
@@ -35,12 +41,15 @@ class Solution:
         l = 0
         r = maxSum
         while l < r:
-            m = int((l + r) / 2)
-            # print(l,m,r)
-            if getMinArraySum(m, index, n) > maxSum:
-                r = m
+            m = (l + r + 1) // 2  # int((l+r)/2)
+            # if getMinArraySum(m, index, n) > maxSum:
+            #     r = m
+            # else:
+            #     l = m + 1
+            if getMinArraySum(m, index + 1, n) <= maxSum:
+                l = m
             else:
-                l = m + 1
+                r = m - 1
 
         """ 
         Binary Search Weakness!!!
@@ -51,7 +60,8 @@ class Solution:
             - getMinArraySum(l) <= maxSum
         """
         """ OK I gave up!! """
-        if getMinArraySum(l, index, n) > maxSum:
-            return l - 1
-        else:
-            return l
+        # if getMinArraySum(l,index,n) > maxSum:
+        #     return l-1
+        # else:
+        #     return l
+        return l
