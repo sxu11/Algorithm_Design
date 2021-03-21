@@ -52,9 +52,10 @@ The bare minimal design
                         - svc4.RunIt(serviceName, serviceVersion, payload); 
 
                 
-- Enrich the functionalities
+- Enrich the functionality: server side
     - M svc, N ver 
-    - Each 10 GB, too large
+        - for e.g., M > 100, N > 3 million
+    - Each svc 10 GB, too large
         - DynamicStorage (key-value), for high
             - availability
             - durability
@@ -75,9 +76,28 @@ The bare minimal design
             - enforce tests (VLAD ?)
         - a Builder svc import ini into Orch
     
-- More functionalities:
+- More functionality for more complicated requirements
     - customized policy:
-        
-        
-        
+        - Policy Engine: allow special treatment of Orch 
+            - e.g. user to opt-out of auto-update: 
+                - MR: a protocol to collect Azure user's policy
+                - PolicyAgent: user side, can set MR approval
+        - Repair: hardware is being maintained, don't update
+            - e.g. Reboot, repave disk, deploy a new version
+            - tracked by DeviceMgr (DM)
+                - just like PolicyEngine to track user policy
+                - DM also provides the interface for other components to query the mapping relation between machine and Env/MF
+                    - also called machine topology
+                    
+- Scale horizontally: client side
+    - Partition 3M machines to smaller groups
+        - MF (~1k) is minimal level, called a Rollout
+        - So, a total of ~3k rollout per global svc
+            - All server side need to scale horizontally to run on multiple instances
+                - OM, DM, PolicyEngine, DynamicStorage, Builder
+            - Stager and Deployer to help
+                1. payload owner makes a checkin to declair deployment
+                2. Global Orch: Stager and Deployer kicks off rollout at Env/MF lvl
+                3. Local Orch: OM performs rollout by working w/ DM, PE, and Client components
+            
         
