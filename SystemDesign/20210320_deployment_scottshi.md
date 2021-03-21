@@ -1,4 +1,5 @@
 Scott Shi
+- 其实当作Scalable File Distribution System
 - [doc](https://docs.google.com/document/d/1X0WBrqalFCCtc3U_pGWnsLPpSIfGvswXY-4U7ekGLb4/edit)
 - [video](https://www.youtube.com/watch?v=FI8G3VeI94w&t=112s)
 
