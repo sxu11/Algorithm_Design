@@ -95,9 +95,33 @@ The bare minimal design
         - So, a total of ~3k rollout per global svc
             - All server side need to scale horizontally to run on multiple instances
                 - OM, DM, PolicyEngine, DynamicStorage, Builder
-            - Stager and Deployer to help
+            - Stager and Deployer to help (conduct SDP, including StageMap, RegionRepair, etc.)
                 1. payload owner makes a checkin to declair deployment
                 2. Global Orch: Stager and Deployer kicks off rollout at Env/MF lvl
                 3. Local Orch: OM performs rollout by working w/ DM, PE, and Client components
             
+        
+- Safety
+    - mechanisms:
+        - Prevention
+            - AzQualify, TiP (before going to deployment system):
+                - BoQ: software contract between AzQualify and OneDeploy
+        - Detection
+            - Potential software issue takes time to surface, e.g. 
+                - Memory leak bug triggered after hrs
+                - Function regression waits until codepath triggered
+            - HealthStore
+                - sets of info:
+                    - ver change history
+                    - ongoing health signal
+            - StageMap (each stage includes Env/MF):
+                    - Stage
+                    - Canary
+                    - Pilot
+                    - Broad
+        - Isolation
+            - RegionRepair: If deploy ongoing in USWest, we don't deploy on USEast at same time
+        - Recovery
+    
+    
         

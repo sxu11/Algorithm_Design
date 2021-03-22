@@ -23,7 +23,9 @@ def callChunk(s):  # chunk of 3 or less
     elif len(s) == 1:
         res = names[s]
     elif len(s) == 2:
-        if s[0] == "1":
+        if s[0] == "0":
+            res = callChunk(s[1])
+        elif s[0] == "1":
             if s in names:
                 res = names[s]
             else:
@@ -41,8 +43,41 @@ def callChunk(s):  # chunk of 3 or less
         else:
             res = " ".join([names[s[0]] + "ty", names[s[1]]])
     elif len(s) == 3:
-        res = " ".join([names[s[0]], "Hundred", callChunk(s[1:])])
+        if s[0] != "0":
+            res = " ".join([names[s[0]], "Hundred", callChunk(s[1:])])
+        else:
+            res = callChunk(s[1:])
 
+    return res.strip()
+
+
+def areAllZero(s):
+    # print(s, list(s), set(list(s)))
+    return set(list(s)) == set("0")
+
+
+def callWord(s):
+    len_s = len(s)
+    if len_s > 9:
+        res = " ".join([callChunk(s[:len_s - 9]),
+                        "Billion", callWord(s[len_s - 9:])
+                        ])
+    elif len_s > 6:
+        if not areAllZero(s[:len_s - 6]):
+            res = " ".join([callChunk(s[:len_s - 6]),
+                            "Million",
+                            callWord(s[len_s - 6:])])
+        else:
+            res = callWord(s[len_s - 6:])
+    elif len_s > 3:
+        if not areAllZero(s[:len_s - 3]):
+            res = " ".join([callChunk(s[:len_s - 3]),
+                            "Thousand",
+                            callChunk(s[len_s - 3:])])
+        else:
+            res = callChunk(s[len_s - 3:])
+    else:
+        res = callChunk(s)
     return res.strip()
 
 
@@ -84,25 +119,4 @@ class Solution:
             return "Zero"
 
         orders = ["Thousand", "Million", "Billion"]
-        len_s = len(s)
-        if len_s > 9:
-            res = " ".join([callChunk(s[:len_s - 9]),
-                            "Billion",
-                            callChunk(s[len_s - 9:len_s - 6]),
-                            "Million",
-                            callChunk(s[len_s - 6:len_s - 3]),
-                            "Thousand",
-                            callChunk(s[len_s - 3:])])
-        elif len_s > 6:
-            res = " ".join([callChunk(s[:len_s - 6]),
-                            "Million",
-                            callChunk(s[len_s - 6:len_s - 3]),
-                            "Thousand",
-                            callChunk(s[len_s - 3:])])
-        elif len_s > 3:
-            res = " ".join([callChunk(s[:len_s - 3]),
-                            "Thousand",
-                            callChunk(s[len_s - 3:])])
-        else:
-            res = callChunk(s)
-        return res.strip()
+        return callWord(s)
