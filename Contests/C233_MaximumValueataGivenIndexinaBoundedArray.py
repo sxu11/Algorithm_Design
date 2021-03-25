@@ -41,6 +41,17 @@ class Solution:
         l = 0
         r = maxSum
         while l < r:
+            """ essentially, we need to find from a list, a place to insert:
+                0, 1, 4, 6, 10,..., maxSum-3, [HERE!], maxSum, ...
+            
+            bisect_left won't work, because
+            
+            1. We target a maxSum
+                - goal is maxSum, or lower (closest)
+            2. if goal < maxSum:
+                - consider getMinArraySum(m) == maxSum
+            """
+
             m = (l + r + 1) // 2  # int((l+r)/2)
             # if getMinArraySum(m, index, n) > maxSum:
             #     r = m
