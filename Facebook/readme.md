@@ -44,7 +44,11 @@ No.	#	Title
     - TLE, but whatever, 93/94 passed, it's a Hard!
 
 6	269	Alien Dictionary
+    - locked (seems done!)
+    
 7	415	Add Strings
+    - 
+
 8	23	Merge k Sorted Lists
 9	297	Serialize and Deserialize Binary Tree
 10	199	Binary Tree Right Side View
