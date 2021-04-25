@@ -69,6 +69,8 @@ No.	#	Title
 25	767	Reorganize String
 26	88	Merge Sorted Array
 27	56	Merge Intervals
+- done, under Basic\
+
 28	71	Simplify Path
 29	270	Closest Binary Search Tree Value
 30	29	Divide Two Integers
